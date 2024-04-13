@@ -1,6 +1,7 @@
 import Matter from 'matter-js';
 import React from 'react';
 import { View, Image, Text } from 'react-native';
+import Physics from '../Physics';
 
 const Circle = (props) => {
     const width = props.radius * 2;
@@ -37,5 +38,6 @@ export default (world, color, pos, radius, options = {}) => {
         });
 
     Matter.World.add(world, circle);
+    console.log('Circle created:'); // Add this line
     return { body: circle, color, radius, renderer: <Circle /> };
 };

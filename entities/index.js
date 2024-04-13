@@ -15,46 +15,58 @@ export default (gameworld) => {
     let world = engine.world;
     let { width, height } = Dimensions.get('window');
 
-    const shapes = [
-        { name: 'Box', component: Box },
-        { name: 'Circle', component: Circle },
-        { name: 'Triangle', component: Triangle },
-        { name: 'Rectangle', component: Rectangle },
-        { name: 'Ellipse', component: EllipseComponent },
-        { name: 'Pentagon', component: Pentagon },
-        { name: 'Hexagon', component: Hexagon },
-    ];
-    const colors = ["green", "red", "blue", "purple", "orange", "yellow", "pink"];
-    let shapeInfo;
-    const createShape = () => {
-        try {
-            const randomIndex = Math.floor(Math.random() * shapes.length);
-            shapeInfo = shapes[randomIndex];
-            const color = colors[randomIndex];
-            const x = Math.random() * width;
-            const size = shapeInfo.name === 'Circle' ? 20 : { width: 60, height: 40 }; // Pass the radius for the Circle
-
-            const shape = shapeInfo.component(
-                world,
-                color,
-                { x, y: -20 },
-                size,
-                { isStatic: false }
-            );
-
-            entities[shape.body.label + Date.now()] = shape;
-
-            // Pass the entities to the Physics function
-            const updatedEntities = Physics(entities, { touches: [], dispatch: () => { }, events: [], time: { delta: 1000 } });
-            console.log('Shape added: ', shape.body.label);
-        } catch (error) {
-            console.log(`Error adding shape: ${shapeInfo.name}, ${error}`);
-        }
-    };
-
-    setInterval(createShape, 1000); // Create a shape every 1000 milliseconds (1 second)
-
     return {
         physics: { engine, world },
+
+        Square: Box(
+            world,
+            'red',
+            { x: width / 2, y: -20 },
+            { width: 40, height: 40 },
+            { isStatic: false, label: 'Box'}
+        ),
+        Circle: Circle(
+            world,
+            'blue',
+            { x: (width / 2 - 20), y: -20 },
+            20,
+            { isStatic: false, label: 'Circle'}
+        ),
+        Triangle: Triangle(
+            world,
+            'green',
+            { x: (width / 2 + 20), y: -20 },
+            {width: 50, height: 50},
+            { isStatic: false, label: 'Triangle'}
+        ),
+        Rectangle: Rectangle(
+            world,
+            'purple',
+            { x: (width / 2 - 20), y: -20 },
+            { width: 60, height: 40 },
+            { isStatic: false, label: 'Rectangle'}
+        ),
+        Ellipse: EllipseComponent(
+            world,
+            'orange',
+            { x: (width / 2 + 60), y: -20 },
+            { width: 60, height: 40 },
+            { isStatic: false, label: 'Ellipse'}
+        ),
+        Pentagon: Pentagon(
+            world,
+            'pink',
+            { x: (width / 2 - 60), y: -20 },
+            { width: 40, height: 40 },
+            { isStatic: false, label: 'Pentagon'}
+        ),
+        Hexagon: Hexagon(
+            world,
+            'yellow',
+            { x: (width / 2 + 20), y: -40 },
+            { width: 60, height: 40 },
+            { isStatic: false, label: 'Hexagon'}
+        ),
     };
+    
 };

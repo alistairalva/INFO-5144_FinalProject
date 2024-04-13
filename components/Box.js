@@ -33,5 +33,6 @@ export default (world, color, pos, size) => {
 
     );
     Matter.World.add(world, theBox);
+    console.log('Box created:'); // Add this line
     return { body: theBox, color, pos, renderer: <Box /> };
 };
