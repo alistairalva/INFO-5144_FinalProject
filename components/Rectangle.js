@@ -1,22 +1,30 @@
-import React from 'react';
-import { Svg, Rect } from 'react-native-svg';
+import { View } from 'react-native';
 import Matter from 'matter-js';
 
 const Rectangle = (props) => {
     const width = props.body.bounds.max.x - props.body.bounds.min.x;
     const height = props.body.bounds.max.y - props.body.bounds.min.y;
-    const x = props.body.position.x - width / 2;
-    const y = props.body.position.y - height / 2;
+
+    const xPos = props.body.position.x - width / 2;
+    const yPos = props.body.position.y - height / 2;
 
     return (
-        <Svg height={height} width={width} style={{ position: 'absolute', top: y, left: x }}>
-            <Rect width={width} height={height} fill={props.color} stroke="black" strokeWidth="2" />
-        </Svg>
+        <View
+            style={{
+                borderWidth: 2,
+                width: width,
+                height: height,
+                left: xPos,
+                top: yPos,
+                backgroundColor: props.color,
+                position: 'absolute',
+            }}
+        ></View>
     );
 };
 
-export default (world, color, pos, size, options = {}) => {
-    const rectangle = Matter.Bodies.rectangle(
+export default (world, color, pos, size) => {
+    const theBox = Matter.Bodies.rectangle(
         pos.x,
         pos.y,
         size.width,
@@ -24,6 +32,7 @@ export default (world, color, pos, size, options = {}) => {
         { label: 'Rectangle', frictionAir: 0, friction: 1, isStatic: false, density: 0.001 }
 
     );
-    Matter.World.add(world, rectangle);
-    return { body: rectangle, color, size, renderer: <Rectangle body={rectangle} color={color} size={size} /> };
+    Matter.World.add(world, theBox);
+    console.log('Rectangle created:');
+    return { body: theBox, color, pos, renderer: <Rectangle /> };
 };

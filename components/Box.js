@@ -29,10 +29,10 @@ export default (world, color, pos, size) => {
         pos.y,
         size.width,
         size.height,
-        { label: 'Box', frictionAir: 0, friction: 1, isStatic: false, density: 0.001 }
+        { label: 'Square', frictionAir: 0, friction: 1, isStatic: false, density: 0.001 }
 
     );
     Matter.World.add(world, theBox);
-    console.log('Box created:'); // Add this line
-    return { body: theBox, color, pos, renderer: <Box /> };
+    console.log('Square created:');
+    return { body: theBox, color, pos, renderer: Box };
 };

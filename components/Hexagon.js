@@ -30,5 +30,6 @@ export default (world, color, pos, size, options = {}) => {
             density: 0.001,
         });
     Matter.World.add(world, hexagon);
-    return { body: hexagon, color, size, renderer: <Hexagon body={hexagon} color={color} size={size} /> };
+    console.log('Hexagon created:');   
+    return { body: hexagon, color, size, renderer: Hexagon };
 };

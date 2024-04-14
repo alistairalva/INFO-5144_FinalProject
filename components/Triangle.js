@@ -37,5 +37,6 @@ export default (world, color, pos, size, options = {}) => {
     );
 
     Matter.World.add(world, triangle);
-    return { body: triangle, color, size, renderer: <Triangle body={triangle} color={color} size={size} /> };
+    console.log('Triangle created:');
+    return { body: triangle, color, size, renderer: Triangle };
 };

@@ -1,21 +1,12 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { View, Text, Button, Alert, StatusBar } from 'react-native';
+import React from 'react';
+import { View, Text, Button, StatusBar } from 'react-native';
 import { GameEngine } from 'react-native-game-engine';
 
-import entities from '../entities/index';
+import { useShapes } from '../entities/index'; // Import the custom hook
 import Physics from '../Physics';
 
 const GameScreen = (props) => {
-    const [gameEntities, setGameEntities] = useState(null);
-
-    useEffect(() => {
-        try {
-            const initialEntities = entities();
-            setGameEntities(initialEntities);
-        } catch (error) {
-            console.error('Failed to initialize entities:', error);
-        }
-    }, []);
+    const gameEntities = useShapes(); // Call the custom hook
 
     if (!gameEntities) {
         return <Text>Loading...</Text>;
@@ -31,7 +22,7 @@ const GameScreen = (props) => {
             />
             <GameEngine
                 systems={[Physics]}
-                entities={gameEntities}
+                entities={gameEntities} // Pass the entities to the GameEngine
             >
                 <StatusBar style="auto" hidden={true} />
             </GameEngine>
