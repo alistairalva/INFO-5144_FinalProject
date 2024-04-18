@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Matter from 'matter-js';
 import { Dimensions } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { addShape } from '../actions';
 
 import Box from '../components/Box';
 import Circle from '../components/Circle';
@@ -15,7 +17,7 @@ export const useShapes = () => {
     let world = engine.world;
     let { width, height } = Dimensions.get('window');
 
-    const [shapes, setShapes] = useState({});
+    const shapes = useSelector(state => state.shapes);
     
     const createRandomShape = () => {
 
@@ -57,20 +59,21 @@ export const useShapes = () => {
         return shape;
     };
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         let shapeId = 0;
         const intervalId = setInterval(() => {
             const newShape = createRandomShape();
-            setShapes(prevShapes => ({ 
-                ...prevShapes, 
-                [`shape${shapeId++}`]: newShape }));
+            dispatch(addShape(`shape${shapeId++}`, newShape ));
         }, 1000);
 
         return () => clearInterval(intervalId); // Clean up on unmount
     }, []);
+
     return {
         physics: { engine, world },
-        ...shapes, // Store the shapes object in the game world
+        ...shapes, // Store the shapes object from the redux
     };
 };
 
