@@ -28,6 +28,6 @@ export default (world, color, pos, size, options = {}) => {
             density: 0.001,
         });
     Matter.World.add(world, circle);
-    console.log('Ellipse created:');
+    console.log('Ellipse initialized:');
     return { body: circle, color, size, renderer: <EllipseComponent body={circle} color={color} size={size} /> };
 };

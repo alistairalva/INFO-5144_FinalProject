@@ -27,31 +27,31 @@ export const useShapes = () => {
         switch (randomShapeIndex) {
             case 0:
                 shape = Box(world, 'red', { x: Math.random() * width, y: 120 }, { width: 40, height: 40 });
-                console.log('Square created:');
+                console.log('Square created in memory!');
                 break;
             case 1:
                 shape = Circle(world, 'blue', { x: Math.random() * width, y: 120 }, 20);
-                console.log('Circle created:');
+                console.log('Circle created in memory!');
                 break;
             case 2:
                 shape = Triangle(world, 'green', { x: Math.random() * width, y: 120 }, { width: 50, height: 50 });
-                console.log('Triangle created:');
+                console.log('Triangle created in memory!');
                 break;
             case 3:
                 shape = Rectangle(world, 'purple', { x: Math.random() * width, y: 120 }, { width: 60, height: 40 });
-                console.log('Rectangle created:');
+                console.log('Rectangle created in memory!');
                 break;
             case 4:
                 shape = EllipseComponent(world, 'orange', { x: Math.random() * width, y: 120 }, { width: 60, height: 40 });
-                console.log('Ellipse created:');
+                console.log('Ellipse created in memory!');
                 break;
             case 5:
                 shape = Pentagon(world, 'pink', { x: Math.random() * width, y: 120 }, { width: 40, height: 40 });
-                console.log('Pentagon created:');
+                console.log('Pentagon created in memory!');
                 break;
             case 6:
                 shape = Hexagon(world, 'yellow', { x: Math.random() * width, y: 140 }, { width: 60, height: 40 });
-                console.log('Hexagon created:');
+                console.log('Hexagon created in memory!');
                 break;
             default:
                 break;
@@ -66,6 +66,7 @@ export const useShapes = () => {
         const intervalId = setInterval(() => {
             const newShape = createRandomShape();
             dispatch(addShape(`shape${shapeId++}`, newShape ));
+            console.log(newShape.body.label + " added to redux store!");
         }, 1000);
 
         return () => clearInterval(intervalId); // Clean up on unmount

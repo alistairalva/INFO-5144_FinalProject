@@ -30,6 +30,6 @@ export default (world, color, pos, size, options = {}) => {
             density: 0.001,
         });
     Matter.World.add(world, pentagon);
-    console.log('Pentagon created:');
+    console.log('Pentagon initialized:');
     return { body: pentagon, color, size, renderer: <Pentagon body={pentagon} color={color} size={size} /> };
 };

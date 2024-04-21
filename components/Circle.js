@@ -38,6 +38,6 @@ export default (world, color, pos, radius, options = {}) => {
         });
 
     Matter.World.add(world, circle);
-    console.log('Circle created:');
+    console.log('Circle initialized:');
     return { body: circle, color, radius, renderer: Circle };
 };

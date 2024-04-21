@@ -33,6 +33,6 @@ export default (world, color, pos, size) => {
 
     );
     Matter.World.add(world, theBox);
-    console.log('Square created:');
+    console.log('Square initialized:');
     return { body: theBox, color, pos, renderer: Box };
 };

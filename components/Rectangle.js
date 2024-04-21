@@ -33,6 +33,6 @@ export default (world, color, pos, size) => {
 
     );
     Matter.World.add(world, theBox);
-    console.log('Rectangle created:');
+    console.log('Rectangle initialized:');
     return { body: theBox, color, pos, renderer: <Rectangle /> };
 };
